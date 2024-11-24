@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { GraduationCap, Hand, LayoutIcon, Settings } from "lucide-react";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-
+import Link from "next/link";
 const SideNav = () => {
   const { user } = useKindeBrowserClient();
   console.log(user);
@@ -38,14 +38,16 @@ const SideNav = () => {
       <Image src={"/logo.svg"} width={180} height={50} alt="logo" />
 
       <hr className="my-5" />
-      {menuList.map((menu, index) => (
-        <h2
-          key={index}
-          className="flex gap-3 p-4 rounded-lg text-md text-slate-500 hover:bg-primary hover:text-white hover:cursor-pointer"
-        >
-          <menu.icon />
-          {menu.name}
-        </h2>
+      {menuList.map((menu) => (
+        <Link  key={menu.id} href={menu.path}>
+          <h2
+           
+            className="flex gap-3 p-4 rounded-lg text-md text-slate-500 hover:bg-primary hover:text-white hover:cursor-pointer"
+          >
+            <menu.icon />
+            {menu.name}
+          </h2>
+        </Link>
       ))}
 
       <div className="fixed flex items-center gap-2 p-2 bottom-5">
@@ -61,8 +63,10 @@ const SideNav = () => {
           <div className="bg-gray-300 rounded-full w-9 h-9"></div> // Fallback in case of no image
         )}
         <div>
-            <h2 className="text-sm font-bold">{user?.given_name} {user?.family_name}</h2>
-            <h2 className="text-xs text-slate-400">{user?.email}</h2>
+          <h2 className="text-sm font-bold">
+            {user?.given_name} {user?.family_name}
+          </h2>
+          <h2 className="text-xs text-slate-400">{user?.email}</h2>
         </div>
       </div>
     </div>

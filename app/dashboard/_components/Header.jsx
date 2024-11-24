@@ -12,7 +12,17 @@ const Header = () => {
       </div>
 
       <div>
-        <Image src={user?.picture} width={35} height={35} alt="user" className="rounded-full"/>
+        {user?.picture? (
+          <Image
+            src={user.picture}
+            alt={user.name}
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
+        ) : (
+          <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
+        )}
       </div>
     </div>
   );
